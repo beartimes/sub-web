@@ -127,12 +127,6 @@
                 </el-input>
               </el-form-item>
 
-              <el-form-item label-width="0px" style="margin-top: 40px; text-align: center">
-                <el-button
-                  style="width: 120px"
-                  type="danger"
-                  @click="makeUrl"
-                  :disabled="form.sourceSubUrl.length === 0"
                 >生成订阅链接</el-button>
                 <el-button
                   style="width: 120px"
