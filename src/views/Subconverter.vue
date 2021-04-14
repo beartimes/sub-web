@@ -127,14 +127,14 @@
                 </el-input>
               </el-form-item>
 
-               >生成订阅链接</el-button>
+               >生成订阅</el-button>
                 <el-button
                   style="width: 120px"
                   type="danger"
                   @click="makeShortUrl"
-                  :loading="loading"
+                  :loading="loading" 
 		  
-                >一键导入Clash</el-button>
+              >一键导入Clash</el-button>
             </el-form>
           </el-container>
         </el-card>
