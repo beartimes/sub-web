@@ -127,21 +127,19 @@
                 </el-input>
               </el-form-item>
 
-                >生成订阅链接</el-button>
+               >生成订阅链接</el-button>
                 <el-button
                   style="width: 120px"
                   type="danger"
                   @click="makeShortUrl"
                   :loading="loading"
-                  :disabled="customSubUrl.length === 0
 		  
-                >上传配置</el-button>
+               >上传配置</el-button>
                 <el-button
                   style="width: 120px"
                   type="primary"
                   @click="clashInstall"
                   icon="el-icon-connection"
-                  :disabled="customSubUrl.length === 0"
                 >一键导入Clash</el-button>
               </el-form-item>
             </el-form>
