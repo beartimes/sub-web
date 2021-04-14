@@ -222,13 +222,16 @@ const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + '/sub?
 const shortUrlBackend = process.env.VUE_APP_MYURLS_DEFAULT_BACKEND + '/short'
 const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/config/upload'
 const tgBotLink = process.env.VUE_APP_BOT_LINK
+
 export default {
   data() {
     var data = {
       backendVersion: '',
       advanced: "1",
+
       // 是否为 PC 端
       isPC: true,
+
       options: {
         clientTypes: {
           Clash: "clash",
@@ -253,7 +256,7 @@ export default {
         customBackend: {
           "localhost:25500 本地版": "http://localhost:25500/sub?",
           "sub.freeeternal.buzz (Freeeternal）": "https://sub.freeeternal.buzz/sub?",
-          "subcon.dlj.tf(subconverter作者提供-稳定)":"https://subcon.dlj.tf/sub?",
+          "subcon.dlj.tf(subconverter作者提供-稳定)": "https://subcon.dlj.tf/sub?",
           "api.dler.io(sub作者&lhie1提供-稳定)": "https://api.dler.io/sub?",
           "api.wcc.best(sub-web作者提供-稳定)": "https://api.wcc.best/sub?",
         },
@@ -520,21 +523,26 @@ export default {
         insert: false, // 是否插入默认订阅的节点，对应配置项 insert_url
         new_name: true, // 是否使用 Clash 新字段
       },
+
       loading: false,
       customSubUrl: "",
       curtomShortSubUrl: "",
+
       dialogUploadConfigVisible: false,
       uploadConfig: "",
       uploadPassword: "",
       myBot: tgBotLink,
       sampleConfig: remoteConfigSample,
+
       needUdp: false, // 是否需要添加 udp 参数
     };
+
     // window.console.log(data.options.remoteConfig);
     // window.console.log(data.options.customBackend);
     let phoneUserAgent = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     );
+
     if (phoneUserAgent) {
       let acl4ssrConfig = data.options.remoteConfig[1].options;
       for (let i = 0; i < acl4ssrConfig.length; i++) {
@@ -556,6 +564,7 @@ export default {
     // document.title = "Subscription Converter";
     document.title = "在线订阅转换";
      this.isPC = this.$getOS().isPc;
+
     // 获取 url cache
     if (process.env.VUE_APP_USE_STORAGE === 'true') {
       this.form.sourceSubUrl = this.getLocalStorageItem('sourceSubUrl')
@@ -588,6 +597,7 @@ export default {
         this.$message.error("请先填写必填项，生成订阅链接");
         return false;
       }
+
       const url = "clash://install-config?url=";
       window.open(
         url +
@@ -603,6 +613,7 @@ export default {
         this.$message.error("请先填写必填项，生成订阅链接");
         return false;
       }
+
       const url = "surge://install-config?url=";
       window.open(url + this.customSubUrl);
     },
@@ -616,10 +627,13 @@ export default {
         this.form.customBackend === ""
           ? defaultBackend
           : this.form.customBackend;
+
       // 远程配置
       let config = this.form.remoteConfig === "" ? "" : this.form.remoteConfig;
+
       let sourceSub = this.form.sourceSubUrl;
       sourceSub = sourceSub.replace(/(\n|\r|\n\r)/g, "|");
+
       // 薯条屏蔽
       if (sourceSub.indexOf("losadhwse") !== -1 && (backend.indexOf("py6.pw") !== -1 || backend.indexOf("subconverter-web.now.sh") !== -1 || backend.indexOf("subconverter.herokuapp.com") !== -1 || backend.indexOf("api.wcc.best") !== -1)) {
         this.$alert('此机场订阅已将该后端屏蔽，请自建后端转换。', '转换错误提示', {
@@ -633,6 +647,7 @@ export default {
         });
         return false;
       }
+
       this.customSubUrl =
         backend +
         "target=" +
@@ -641,9 +656,11 @@ export default {
         encodeURIComponent(sourceSub) +
         "&insert=" +
         this.form.insert;
+
       if (config !== "") {
         this.customSubUrl += "&config=" + encodeURIComponent(config);
       }
+
       if (this.advanced === "2") {
         if (this.form.excludeRemarks !== "") {
           this.customSubUrl +=
@@ -661,6 +678,7 @@ export default {
           this.customSubUrl +=
             "&append_type=" + this.form.appendType.toString();
         }
+
         this.customSubUrl +=
           "&emoji=" +
           this.form.emoji.toString() +
@@ -676,13 +694,16 @@ export default {
           this.form.sort.toString() +
           "&expand=" +
           this.form.expand.toString();
+
         if (this.needUdp) {
           this.customSubUrl += "&udp=" + this.form.udp.toString()
         }
+
         if (this.form.clientType === "clash") {
           this.customSubUrl += "&new_name=" + this.form.new_name.toString();
         }
       }
+
       this.$copyText(this.customSubUrl);
       this.$message.success("定制订阅已复制到剪贴板");
     },
@@ -691,9 +712,12 @@ export default {
         this.$message.warning("请先生成订阅链接，再获取对应短链接");
         return false;
       }
+
       this.loading = true;
+
       let data = new FormData();
       data.append("longUrl", btoa(this.customSubUrl));
+
       this.$axios
         .post(shortUrlBackend, data, {
           header: {
@@ -721,10 +745,13 @@ export default {
         this.$message.warning("远程配置不能为空");
         return false;
       }
+
       this.loading = true;
+
       let data = new FormData();
       data.append("password", this.uploadPassword);
       data.append("config", this.uploadConfig);
+
       this.$axios
         .post(configUploadBackend, data, {
           header: {
@@ -736,9 +763,11 @@ export default {
             this.$message.success(
               "远程配置上传成功，配置链接已复制到剪贴板，有效期三个月望知悉"
             );
+
             // 自动填充至『表单-远程配置』
             this.form.remoteConfig = res.data.Url;
             this.$copyText(this.form.remoteConfig);
+
             this.dialogUploadConfigVisible = false;
           } else {
             this.$message.error("远程配置上传失败：" + res.data.Message);
@@ -753,9 +782,11 @@ export default {
     },
     backendSearch(queryString, cb) {
       let backends = this.options.backendOptions;
+
       let results = queryString
         ? backends.filter(this.createFilter(queryString))
         : backends;
+
       // 调用 callback 返回建议列表的数据
       cb(results);
     },
@@ -784,6 +815,7 @@ export default {
     getLocalStorageItem(itemKey) {
       const now = +new Date()
       let ls = localStorage.getItem(itemKey)
+
       let itemValue = ''
       if (ls !== null) {
         let data = JSON.parse(ls)
@@ -793,11 +825,13 @@ export default {
           localStorage.removeItem(itemKey)
         }
       }
+
       return itemValue
     },
     setLocalStorageItem(itemKey, itemValue) {
       const ttl = process.env.VUE_APP_CACHE_TTL
       const now = +new Date()
+
       let data = {
         setTime: now,
         ttl: parseInt(ttl),
