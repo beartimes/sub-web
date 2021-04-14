@@ -4,7 +4,7 @@
       <el-col>
         <el-card>
           <div slot="header">
-            订阅转换
+            Freeeternal-订阅转换
             <svg-icon icon-class="github" style="margin-left: 20px" @click="goToProject" />
             <svg-icon icon-class="telegram" style="margin-left: 20px" @click="gotoTgChannel" />
 
@@ -256,7 +256,7 @@ export default {
         },
         customBackend: {
           "localhost:25500 本地版": "http://localhost:25500/sub?",
-          "sub.freeeternal.buzz (freeeternal-提供）": "https://sub.freeeternal.buzz/sub?",
+          "sub.freeeternal.buzz (Freeeternal）": "https://sub.freeeternal.buzz/sub?",
           "subcon.dlj.tf(subconverter作者提供-稳定)":
             "https://subcon.dlj.tf/sub?",
           "api.dler.io(sub作者&lhie1提供-稳定)": "https://api.dler.io/sub?",
