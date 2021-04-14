@@ -4,7 +4,7 @@
       <el-col>
         <el-card>
           <div slot="header">
-            Freeeternal-订阅转换
+            Freeeternal-订阅转换界面
             <svg-icon icon-class="telegram" style="margin-left: 20px" @click="gotoTgChannel" />
 
             <div style="display: inline-block; position:absolute; right: 20px">{{ backendVersion }}</div>
