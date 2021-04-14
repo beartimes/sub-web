@@ -139,15 +139,8 @@
                   type="danger"
                   @click="makeShortUrl"
                   :loading="loading"
-                  :disabled="customSubUrl.length === 0"
-
-              <el-form-item label-width="0px" style="text-align: center">
-                <el-button
-                  style="width: 120px"
-                  type="primary"
-                  @click="dialogUploadConfigVisible = true"
-                  icon="el-icon-upload"
-                  :loading="loading"
+                  :disabled="customSubUrl.length === 0
+		  
                 >上传配置</el-button>
                 <el-button
                   style="width: 120px"
