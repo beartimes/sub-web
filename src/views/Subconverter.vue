@@ -255,14 +255,14 @@ export default {
         },
         customBackend: {
           "localhost:25500 本地版": "http://localhost:25500/sub?",
-          "sub.freeeternal.xyz (Freeeternal）": "https://sub.freeeternal.xyz/sub?",
+          "sub.981109.xyz (Freeeternal）": "https://sub.891109.xyz/sub?",
           "subcon.dlj.tf(subconverter作者提供-稳定)": "https://subcon.dlj.tf/sub?",
           "api.dler.io(sub作者&lhie1提供-稳定)": "https://api.dler.io/sub?",
           "api.wcc.best(sub-web作者提供-稳定)": "https://api.wcc.best/sub?",
         },
         backendOptions: [
           { value: "http://localhost:25500/sub?" },
-          { value: "https://sub.freeeternal.xyz/sub?" },
+          { value: "https://sub.981109.xyz/sub?" },
           { value: "https://subcon.dlj.tf/sub?" },
           { value: "https://api.dler.io/sub?" },
           { value: "https://api.wcc.best/sub?" },
@@ -572,7 +572,7 @@ export default {
   },
   mounted() {
     this.form.clientType = "clash";
-    this.form.customBackend = "https://sub.freeeternal.xyz/sub?";
+    this.form.customBackend = "https://sub.981109.xyz/sub?";
     this.form.remoteConfig = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini";
     this.getBackendVersion();
   },
